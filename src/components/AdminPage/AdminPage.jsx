@@ -1,9 +1,10 @@
 import React from "react";
+import RestaurantTable from '../RestaurantTable/RestaurantTable';
 
-function AdminPage() {
+function AdminPage(props) {
   return (
     <div data-testid="admin-page">
-      <h1>Admin Page</h1>
+      <RestaurantTable restaurants={props} />
     </div>
   )
 }
