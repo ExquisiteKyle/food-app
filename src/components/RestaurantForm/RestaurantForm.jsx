@@ -10,35 +10,31 @@ class RestaurantForm extends Component {
         this.state = {
             cuisines: getCuisines(),
             data: {
-                name: "",
-                address: "",
-                openingTime: "",
-                closingTime: "",
-                cuisineId: "",
-                averagePrice: "",
-                imageUrl: ""
+                name: null,
+                address: null,
+                openingTime: null,
+                closingTime: null,
+                cuisineId: null,
+                averagePrice: null,
+                imageUrl: null
             }
         };
     }
 
-    handleSubmit = event => {
+    handleSubmit = (event) => {
         event.preventDefault();
-        const { cuisineId, averagePrice } = { ...this.state.data };
-        const cuisine = getCuisines().find(cuisine => cuisine._id === cuisineId);
-
+        const cuisineId = this.state.data.cuisineId;
+        const cuisine = this.state.cuisines.find(cuisine => cuisine._id === cuisineId);
         const restaurant = { ...this.state.data };
-        delete restaurant.cuisineId;
         restaurant.cuisine = cuisine
-        restaurant.averagePrice = parseFloat(averagePrice)
-
+        restaurant.averagePrice = parseFloat(restaurant.averagePrice)
         saveRestaurant(restaurant);
-        this.props.history.replace(this.props.returnPath);
     };
 
     handleChange = (event) => {
         const data = { ...this.state.data };
         data[event.currentTarget.name] = event.currentTarget.value;
-        this.setState({ data });
+        this.setState({ data: data });
     };
 
     render() {
