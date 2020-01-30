@@ -34,7 +34,7 @@ class RestaurantForm extends Component {
     handleChange = (event) => {
         const data = { ...this.state.data };
         data[event.currentTarget.name] = event.currentTarget.value;
-        this.setState({ data: data });
+        this.setState({ data });
     };
 
     render() {

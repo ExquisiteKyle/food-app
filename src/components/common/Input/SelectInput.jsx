@@ -12,7 +12,7 @@ function SelectInput(props) {
             >
                 <option key="default">Choose one</option>
                 {props.options.map(option => (
-                    <option value={option._id} key={`${option._id}`}>
+                    <option value={option._id} key={option._id}>
                         {option.name}
                     </option>
                 ))}
