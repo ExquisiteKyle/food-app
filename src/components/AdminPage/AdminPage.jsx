@@ -1,6 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import RestaurantTable from "../RestaurantTable/RestaurantTable"
 import { getRestaurants, deleteRestaurant } from '../../services/restaurantService';
+import { Link } from 'react-router-dom';
 
 class AdminPage extends Component {
   state = {
@@ -12,11 +13,12 @@ class AdminPage extends Component {
     this.setState({ restaurants: getRestaurants() });
   };
 
-  render(){
-    const {restaurants} = this.state;
+  render() {
+    const { restaurants } = this.state;
     return (
       <div data-testid="admin-page">
-        <RestaurantTable restaurants={restaurants} handleDelete={this.handleDelete}/>
+        <Link className="btn btn-primary" to="/restaurants/new">Create New</Link>
+        <RestaurantTable restaurants={restaurants} handleDelete={this.handleDelete} />
       </div>
     )
   }
