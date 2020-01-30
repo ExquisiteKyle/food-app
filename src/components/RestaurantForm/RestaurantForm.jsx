@@ -15,7 +15,7 @@ class RestaurantForm extends Component {
                 address: "",
                 openingTime: "",
                 closingTime: "",
-                cuisineId: "",
+                cuisine: "",
                 averagePrice: "",
                 imageUrl: ""
             },
@@ -23,6 +23,7 @@ class RestaurantForm extends Component {
     }
 
     componentDidMount() {
+        // /something/:id
         if (this.props.match.params.id !== undefined) {
             this.setState({
                 data: getRestaurant(this.props.match.params.id)
@@ -32,7 +33,8 @@ class RestaurantForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const { cuisineId, averagePrice } = this.state.data
+        const cuisineId = this.state.data.cuisine._id;
+        const averagePrice = this.state.data.averagePrice;
         const cuisine = getCuisines().find(cuisine => cuisine._id === cuisineId);
 
         const restaurant = { ...this.state.data };
@@ -40,7 +42,7 @@ class RestaurantForm extends Component {
         restaurant.cuisine = cuisine
         restaurant.averagePrice = parseFloat(averagePrice)
         saveRestaurant(restaurant);
-        //this.props.history.replace(this.props.returnPath);
+        this.props.history.replace(this.props.history.goBack(-1));
     };
 
     handleChange = ({ currentTarget: input }) => {
@@ -54,7 +56,7 @@ class RestaurantForm extends Component {
         const { name, address, openingTime, closingTime, cuisine, imageUrl, averagePrice } = { ...this.state.data };
         return (
             <div data-testid="create-page">
-                <h3>{this.state.restaurant ? "Edit Restaurant" : "New Restaurant"}</h3>
+                <h3>{this.state.data ? "Edit Restaurant" : "Create Restaurant"}</h3>
                 <form onSubmit={this.handleSubmit}>
                     <Input
                         name="name"
