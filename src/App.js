@@ -16,6 +16,7 @@ class App extends Component {
             <Switch>
               <Route path="/orders" component={OrderPage} />
               <Route path="/admin" component={AdminPage} />
+              <Route path="/restaurants/:id" component={RestaurantForm} />
               <Route
                 path="/restaurants/new"
                 render={props => <RestaurantForm {...props} returnPath="/admin" />}
