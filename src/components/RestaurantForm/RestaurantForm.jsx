@@ -23,7 +23,7 @@ class RestaurantForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const { cuisineId, averagePrice } = this.state.data
+        const { cuisineId, averagePrice } = { ...this.state.data };
         const cuisine = getCuisines().find(cuisine => cuisine._id === cuisineId);
 
         const restaurant = { ...this.state.data };
@@ -35,9 +35,9 @@ class RestaurantForm extends Component {
         this.props.history.replace(this.props.returnPath);
     };
 
-    handleChange = ({ currentTarget: input }) => {
+    handleChange = (event) => {
         const data = { ...this.state.data };
-        data[input.name] = input.value;
+        data[event.currentTarget.name] = event.currentTarget.value;
         this.setState({ data });
     };
 
